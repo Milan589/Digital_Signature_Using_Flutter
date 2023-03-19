@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nepal_digit/screens/draw.dart';
 import 'package:nepal_digit/screens/homepage.dart';
 
 class Dashboard extends StatefulWidget {
@@ -41,6 +42,23 @@ class _DashboardState extends State<Dashboard> {
                   color: Colors.white,
                 ),
                 label: const Text("Capture Image"),
+              ),
+              ElevatedButton.icon(
+                //image capture button
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.redAccent,
+                ),
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Draw()),
+                  );
+                },
+                icon: const Icon(
+                  Icons.camera,
+                  color: Colors.white,
+                ),
+                label: const Text("Draw"),
               )
             ],
           ),
