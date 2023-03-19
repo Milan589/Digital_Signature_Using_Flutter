@@ -29,72 +29,72 @@ class _DrawState extends State<Draw> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text("Nepali Digit Classification"),
+          backgroundColor: Colors.redAccent,
+        ),
         body: Column(
           children: <Widget>[
-            Signature(
-              controller: controller,
-              backgroundColor: Colors.black,
-              height: 400,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  child: Text(
+                    'Draw here as you requires',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                )
+              ],
             ),
-            buildButtons(context),
-            buildSwapOrientation(),
+            Container(
+              width: 350,
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.redAccent,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 92, 80, 80),
+                      offset: Offset(3.0, 3.0),
+                      blurRadius: 2.0,
+                    )
+                  ]),
+              child: Signature(
+                controller: controller,
+                backgroundColor: const Color.fromARGB(255, 211, 129, 129),
+                height: 400,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            buttons(context),
           ],
         ),
       );
-
-  Widget buildSwapOrientation() {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
-
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        final newOrientation =
-            isPortrait ? Orientation.landscape : Orientation.portrait;
-
-        controller.clear();
-        setOrientation(newOrientation);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              isPortrait
-                  ? Icons.screen_lock_portrait
-                  : Icons.screen_lock_landscape,
-              size: 40,
-            ),
-            const SizedBox(width: 12),
-            Text(
-              'Tap to change signature orientation',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildButtons(BuildContext context) => Container(
-        color: Colors.black,
+  Widget buttons(BuildContext context) => Container(
+        color: Colors.redAccent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            buildCheck(context),
-            buildClear(),
+            successButton(context),
+            clearButton(),
           ],
         ),
       );
 
-  Widget buildCheck(BuildContext context) => IconButton(
-        iconSize: 36,
-        icon: Icon(Icons.check, color: Colors.green),
+  Widget successButton(BuildContext context) => IconButton(
+        icon: const Icon(Icons.check, color: Colors.green),
+        iconSize: 50,
         onPressed: () async {
           if (controller.isNotEmpty) {
             final signature = await exportSignature();
 
+            // ignore: use_build_context_synchronously
             await Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => DrawPreview(
                 signature: signature,
@@ -106,9 +106,9 @@ class _DrawState extends State<Draw> {
         },
       );
 
-  Widget buildClear() => IconButton(
+  Widget clearButton() => IconButton(
         iconSize: 36,
-        icon: Icon(Icons.clear, color: Colors.red),
+        icon: const Icon(Icons.clear, color: Colors.white),
         onPressed: () => controller.clear(),
       );
 

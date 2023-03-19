@@ -1,9 +1,7 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../display.dart';
 
 class DrawPreview extends StatelessWidget {
@@ -18,13 +16,22 @@ class DrawPreview extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          leading: CloseButton(),
-          title: Text('Store Signature'),
+          leading: const CloseButton(),
+          title: const Text('Store Picture'),
           centerTitle: true,
+          backgroundColor: Colors.redAccent,
           actions: [
             IconButton(
-              icon: Icon(Icons.done),
-              onPressed: () => storeSignature(context),
+              icon: const Icon(Icons.done),
+              onPressed: () => storePicture(context),
+            ),
+            const SizedBox(width: 8),
+            IconButton(
+              icon: const Icon(Icons.abc_sharp),
+              onPressed: () async{
+                var responseDataHttp =
+                                      await _httpService.uploadPhotos(_images);
+              },
             ),
             const SizedBox(width: 8),
           ],
@@ -34,28 +41,29 @@ class DrawPreview extends StatelessWidget {
         ),
       );
 
-  Future storeSignature(BuildContext context) async {
+  Future storePicture(BuildContext context) async {
     final status = await Permission.storage.status;
     if (!status.isGranted) {
       await Permission.storage.request();
     }
 
     final time = DateTime.now().toIso8601String().replaceAll('.', ':');
-    final name = 'signature_$time.png';
+    final name = 'digit_$time.png';
 
     final result = await ImageGallerySaver.saveImage(signature!, name: name);
     final isSuccess = result['isSuccess'];
 
     if (isSuccess) {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
 
-      Utils.showSnackBar(
+      SetClear.clearBar(
         context,
         text: 'Saved to signature folder',
         color: Colors.green,
       );
     } else {
-      Utils.showSnackBar(
+      SetClear.clearBar(
         context,
         text: 'Failed to save signature',
         color: Colors.red,

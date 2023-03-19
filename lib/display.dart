@@ -1,10 +1,10 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-class Utils {
+class SetClear {
   static final List<Flushbar> flushBars = [];
 
-  static void showSnackBar(
+  static void clearBar(
     BuildContext context, {
     required String text,
     required Color color,

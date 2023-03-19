@@ -162,10 +162,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   // show loader
                                   presentLoader(context, text: 'Wait...');
 
-                                  // // calling with dio
-                                  // var responseDataDio =
-                                  //     await _dioService.uploadPhotos(_images);
-
                                   // calling with http
                                   var responseDataHttp =
                                       await _httpService.uploadPhotos(_images);
@@ -173,10 +169,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                   // hide loader
                                   Navigator.of(context).pop();
 
-                                  // showing alert dialogs
-                                  // await presentAlert(context,
-                                  //     title: 'Success Dio',
-                                  //     message: responseDataDio.toString());
                                   await presentAlert(context,
                                       title: 'Success HTTP',
                                       message: responseDataHttp);

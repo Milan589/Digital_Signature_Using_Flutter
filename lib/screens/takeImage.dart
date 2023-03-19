@@ -46,25 +46,28 @@ class _TakeImageState extends State<TakeImage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Take picture'),
+        title: const Text("Take Photo"),
+        backgroundColor: Colors.redAccent,
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.redAccent,
         onPressed: () async {
           final file = await takePicture();
           Navigator.of(context).pop(file != null ? file.path : null);
         },
-        child: const Icon(Icons.camera_alt),
+        child: const Icon(
+          Icons.camera_alt,
+          color: Colors.white,
+        ),
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Container(
-              // height: MediaQuery.of(context).size.height,
               child: CameraPreview(_controller),
             );
           } else {
-            // Otherwise, display a loading indicator.
             return const Center(child: CircularProgressIndicator());
           }
         },
