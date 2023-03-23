@@ -19,7 +19,6 @@ class _TakeImageState extends State<TakeImage> {
     super.initState();
 
     _controller = CameraController(
-      // Get a specific camera from the list of available cameras.
       widget.camera as CameraDescription,
       // Define the resolution to use.
       ResolutionPreset.medium,

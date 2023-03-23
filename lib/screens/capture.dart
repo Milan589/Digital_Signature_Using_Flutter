@@ -37,11 +37,6 @@ class CaputreImage extends StatelessWidget {
                         blurRadius: 2.0,
                       )
                     ]),
-                // child: IconButton(
-                //     onPressed: () {
-                //       print('icon press');
-                //     },
-                //     icon: const Icon(Icons.delete, color: Colors.white)),
               )
             ],
           ),

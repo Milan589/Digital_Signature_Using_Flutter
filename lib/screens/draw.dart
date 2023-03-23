@@ -16,7 +16,7 @@ class _DrawState extends State<Draw> {
     super.initState();
 
     controller = SignatureController(
-      penStrokeWidth: 5,
+      penStrokeWidth: 15,
       penColor: Colors.white,
     );
   }
@@ -114,7 +114,7 @@ class _DrawState extends State<Draw> {
 
   Future<Uint8List?> exportSignature() async {
     final exportController = SignatureController(
-      penStrokeWidth: 2,
+      penStrokeWidth: 15,
       penColor: Colors.black,
       exportBackgroundColor: Colors.white,
       points: controller.points,

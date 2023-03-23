@@ -15,7 +15,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final HttpService _httpService = HttpService();
-  // final DioService _dioService = DioService();
   late CameraDescription _cameraDescription;
   List<String> _images = [];
   @override
